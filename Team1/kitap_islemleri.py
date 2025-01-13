@@ -19,6 +19,7 @@ def dosya_kaydet(veriler):
         json.dump(veriler,file,  ensure_ascii=False, indent=2)
 
 def yeni_kitap_ekle():
+
     tum_kitaplar = dosya_yukle()
     mevcut_barkodlar = [kitap["Barkod"] for kitap in tum_kitaplar]
     if mevcut_barkodlar:
@@ -38,3 +39,9 @@ def yeni_kitap_ekle():
 
     tum_kitaplar.append(yeni_kitap)
     dosya_kaydet(tum_kitaplar)
+
+def kitap_sil():
+    print("Kitap silindi")
+
+def kitap_ara():
+    print("Aranilan kitap ..")
