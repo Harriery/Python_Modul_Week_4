@@ -10,24 +10,14 @@
     "zaman": null
   },
   {
-    "Barkod": 9786057906465,
-    "Dil": "Türkçe",
-    "Fiyat": 20.4,
-    "Kitap_Adi": "Yanlış Hayat Doğru Yaşanmaz",
-    "Yayinevi": "Olimpos Yayınları",
-    "Yazar": "Ethem Emin Nemutlu",
-    "durum": "uygun",
-    "zaman": null
-  },
-  {
     "Barkod": 9786051856322,
     "Dil": "Türkçe",
     "Fiyat": 27.3,
     "Kitap_Adi": "Hazan",
     "Yayinevi": "Everest Yayınları",
     "Yazar": "Ayşe Kulin",
-    "durum": "uygun",
-    "zaman": null
+    "durum": "meşgul",
+    "zaman": "2025-01-29"
   },
   {
     "Barkod": 9789750751363,

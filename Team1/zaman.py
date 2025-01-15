@@ -7,6 +7,9 @@ def odunc_suresi_hesapla():
     return iki_hafta_sonra.strftime('%Y-%m-%d')  # Tarihi formatla
 
 
+
+
+#*******************************************************************
 #timedelta, iki tarih veya zaman arasındaki farkı temsil eden bir yapıdır.
 #  Ayrıca, bir tarihe veya zamana ekleme/çıkarma yapmanı sağlar.
 

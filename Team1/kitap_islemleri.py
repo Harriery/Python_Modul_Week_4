@@ -3,6 +3,7 @@ import os
 
 kitap_json_yolu = r"c:\Users\harri\Desktop\Python_Modul_Week_4\Team1\kitap.json"
  
+
 def dosya_yukle():
     try:
         with open(kitap_json_yolu, "r", encoding= "utf-8") as file:
@@ -11,8 +12,8 @@ def dosya_yukle():
     except(FileNotFoundError, json.JSONDecodeError):
         print("Dosya bulunamadı veya JSON hatalı! Lütfen kontrol edin.")
         return {}
-tum_kitaplar = dosya_yukle()
-print(tum_kitaplar[0])
+#tum_kitaplar = dosya_yukle()
+#print(tum_kitaplar[0])
 
 def dosya_kaydet(veriler):
     with open(kitap_json_yolu, "w", encoding="utf-8") as file:
@@ -41,10 +42,35 @@ def yeni_kitap_ekle():
     dosya_kaydet(tum_kitaplar)
 
 def kitap_sil():
-    print("Kitap silindi")
+    tum_kitaplar = dosya_yukle()
+    kitap_sec=input("silmek istediginiz kitabi seciniz: ")
+    for kitap in tum_kitaplar:
+        if kitap_sec == kitap['Kitap_Adi']:
+            tum_kitaplar.remove(kitap)
+            
+            print(f"{kitap_sec} Kitap basariyla silindi")
+            dosya_kaydet(tum_kitaplar)
+            return
+    print(f"{kitap_sec} Kitap bulunamadi ")
+#kitap_sil()
 
 def kitap_ara():
-    print("Aranilan kitap ..")
+    tum_kitaplar = dosya_yukle()
+    kitap_sec = input("Bulmak istediğiniz kitabın adini giriniz (boş geçebilirsiniz): ")
+    barkod_sec = None
+    try:
+        barkod_sec = int(input("Barkod giriniz..").strip())
+        if barkod_sec:
+            int(barkod_sec)
+   
+    except ValueError:
+        print("Yanlis Barkod Girdiniz..!")    
+    for kitap in tum_kitaplar:
+        if kitap_sec == kitap["Kitap_Adi"] or barkod_sec == kitap["Barkod"]:
+            return print(kitap)
+            
+    print("Aradiginiz kitap bulunamadi.")
+#kitap_ara()
 
 def kitap_anahtari_ekle():
     tum_kitaplar = dosya_yukle()
@@ -54,4 +80,4 @@ def kitap_anahtari_ekle():
         if "zaman" not in kitap:
             kitap["zaman"] = None  
     dosya_kaydet(tum_kitaplar)
-kitap_anahtari_ekle()
+#kitap_anahtari_ekle()

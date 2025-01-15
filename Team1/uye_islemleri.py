@@ -13,9 +13,9 @@ def uye_yukle():
         print("Dosya bulunamadı veya JSON hatalı! Lütfen kontrol edin.")
     return {}
 
-print("Json dosyasindaki uyeler basariyla yuklendi")
-tum_uyeler = uye_yukle()
-print(tum_uyeler)
+#print("Json dosyasindaki uyeler basariyla yuklendi")
+#tum_uyeler = uye_yukle()
+#print(tum_uyeler)
 
 
 def uye_kaydet(veriler):
@@ -106,9 +106,10 @@ def kitap_odunc_verme():
             kitap["durum"] = "meşgul"
             kitap["zaman"] = odunc_suresi  # Ödünç alma tarihi
 
+            
             # Kullanıcı ödünç aldığı kitabı kaydediyor
             for uye in tum_uyeler:
-                if uye["kullanici_ismi"].lower() == uye_sec.lower():
+                if uye.get("kullanici_ismi", "").lower() == uye_sec.lower():
                     uye["odunc_kitaplar"].append({
                         "Kitap_Adi": kitap["Kitap_Adi"],
                         "Barkod": kitap["Barkod"],
@@ -119,16 +120,17 @@ def kitap_odunc_verme():
                     break
 
             dosya_kaydet(tum_kitaplar)  # Kitapları güncelle
-            print(f"{kitap_sec} kitabı başarıyla ödünç alındı.")
+            print(f"{kitap_sec} kitabi basariyla ödünç alindi.")
             break
 
         elif kitap["Kitap_Adi"].lower() == kitap_sec.lower() and kitap["durum"] != "uygun":
-            print(f"{kitap_sec} kitabı şu anda ödünç alınmış durumda.")
+            print(f"{kitap_sec} kitabi su anda ödünc alinmis durumda.")
             break
 
-    print(f"Kitap {odunc_suresi} tarihine kadar ödünç verildi.")
+    print(f"Kitap {odunc_suresi} tarihine kadar ödünc verildi.")
 
     
 kitap_odunc_verme()
 def kitap_iade():
+
     print("Uyeye ait kitap basariyla iade edildi..")
