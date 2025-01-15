@@ -1,0 +1,22 @@
+{
+  "uyeler": [
+    {
+      "id": "1",
+      "kullanici_ismi": "Islam Kavas",
+      "telefon": 645789412,
+      "adres": "Bir adres, Baska bir sokak,Hollanda"
+    },
+    {
+      "id": "2",
+      "kullanici_ismi": "Zehra Okay",
+      "telefon": 678954168,
+      "adres": "bir adres,bir sokak, Hollanda"
+    },
+    {
+      "id": "3",
+      "kullanici_ismi": "Yasin Utuk",
+      "telefon": 64568721,
+      "adres": "bir adres bir sokak, Hollanda"
+    }
+  ]
+}

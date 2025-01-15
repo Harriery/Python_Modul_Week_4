@@ -45,3 +45,13 @@ def kitap_sil():
 
 def kitap_ara():
     print("Aranilan kitap ..")
+
+def kitap_anahtari_ekle():
+    tum_kitaplar = dosya_yukle()
+    for kitap in tum_kitaplar:
+        if "durum" not in kitap:
+            kitap["durum"] = "uygun"
+        if "zaman" not in kitap:
+            kitap["zaman"] = None  
+    dosya_kaydet(tum_kitaplar)
+kitap_anahtari_ekle()
