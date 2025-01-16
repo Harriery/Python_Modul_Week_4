@@ -6,8 +6,8 @@
     "Kitap_Adi": "Süt Lekesi",
     "Yayinevi": "Destek Yayınları",
     "Yazar": "Esra Ezmeci",
-    "durum": "uygun",
-    "zaman": null
+    "durum": "meşgul",
+    "zaman": "2025-01-30"
   },
   {
     "Barkod": 9786051856322,
@@ -27,7 +27,9 @@
     "Yayinevi": "Can Yayınları",
     "Yazar": "Paulo Coelho",
     "durum": "uygun",
-    "zaman": null
+    "zaman": "2025-01-30",
+    "teslim_zamani": null,
+    "alinma_zamani": null
   },
   {
     "Barkod": 9786258495423,
@@ -36,8 +38,8 @@
     "Kitap_Adi": "Zamir",
     "Yayinevi": "Doğan Kitap",
     "Yazar": "Hakan Günday",
-    "durum": "uygun",
-    "zaman": null
+    "durum": "meşgul",
+    "zaman": "2025-01-30"
   },
   {
     "Barkod": 9786254053702,
@@ -56,8 +58,10 @@
     "Kitap_Adi": "Altıncı Koğuş",
     "Yayinevi": "İş Bankası Kültür Yayınları - Modern Klasikler",
     "Yazar": "Anton Pavloviç Çehov",
-    "durum": "uygun",
-    "zaman": null
+    "durum": "meşgul",
+    "zaman": null,
+    "teslim_zamani": "2025-01-30",
+    "alinma_zamani": "2025-01-16"
   },
   {
     "Barkod": 9786052182734,

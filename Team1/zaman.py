@@ -1,4 +1,4 @@
-import json
+
 from datetime import datetime, timedelta
 
 def odunc_suresi_hesapla():
@@ -6,6 +6,9 @@ def odunc_suresi_hesapla():
     iki_hafta_sonra = bugun + timedelta(weeks=2)  # 2 hafta ekle
     return iki_hafta_sonra.strftime('%Y-%m-%d')  # Tarihi formatla
 
+def odunc_zamani():
+    bugun = datetime.now()
+    return bugun.strftime('%Y-%m-%d')
 
 
 

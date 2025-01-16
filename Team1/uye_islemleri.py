@@ -1,5 +1,5 @@
 from kitap_islemleri import dosya_kaydet, dosya_yukle 
-from zaman import odunc_suresi_hesapla
+from zaman import odunc_suresi_hesapla, odunc_zamani
 import json
 import os
 
@@ -26,27 +26,24 @@ def uye_kaydet(veriler):
 def uye_ekle():
     tum_uyeler = uye_yukle() 
 
-    if 'uyeler' not in tum_uyeler:
-        tum_uyeler ['uyeler'] = []
-
-    uyeler = tum_uyeler['uyeler']
-    if uyeler:
-        uye_id = int(uyeler[-1]['id']) +1
+    if tum_uyeler:
+        uye_id = int(tum_uyeler[-1]['id']) +1
     else:
         uye_id =1
 
     yeni_uyeler = {
         'id': str(uye_id),
         'kullanici_ismi': input("İsim giriniz: "),
-        'telefon': int(input("'Telefon numarasını giriniz: ")),
-        'adres': input("Ádres giriniz: ")
+        'telefon': int(input("'Telefon numarasini giriniz: ")),
+        'adres': input("Ádres giriniz: "),
+        'odunc_kitaplar' :[]
     }
-    uyeler.append(yeni_uyeler)
+    tum_uyeler.append(yeni_uyeler)
     
     uye_kaydet(tum_uyeler)
 
     print("Yeni uye olusturuldu")
-#uye_ekle()
+uye_ekle()
 #
 def uye_ara():
     tum_uyeler = uye_yukle()  # JSON dosyasını yükleyen fonksiyon
@@ -90,10 +87,11 @@ def uye_sil():
 
 def kitap_odunc_verme():
     tum_kitaplar = dosya_yukle()
-    tum_uyeler = dosya_yukle()
+    tum_uyeler = uye_yukle()
+    odunc_alma_zamani = odunc_zamani()
     odunc_suresi = odunc_suresi_hesapla()  # Fonksiyonu çağır
-    uye_sec = input("Kitabi Odunc Almak Isteyen Uyenin Ismini Giriniz: ")
-    kitap_sec = input("Kullanicinin Odunc Almak Istedig Kitabin Adini Giriniz: ")
+    uye_sec = input("Kitabi Odunc Almak Isteyen Uyenin Ismini Giriniz: ").strip()
+    kitap_sec = input("Kullanicinin Odunc Almak Istedig Kitabin Adini Giriniz: ").strip()
 
     # Her kullanıcının 'odunc_kitaplar' listesi olsun
     for uye in tum_uyeler:
@@ -104,19 +102,22 @@ def kitap_odunc_verme():
         if kitap["Kitap_Adi"].lower() == kitap_sec.lower() and kitap["durum"] == "uygun":
             # Kitap ödünç alındığında
             kitap["durum"] = "meşgul"
-            kitap["zaman"] = odunc_suresi  # Ödünç alma tarihi
+            kitap["teslim_zamani"] = odunc_suresi  # Ödünç alma tarihi
+            kitap["alinma_zamani"] = odunc_alma_zamani
+
 
             
-            # Kullanıcı ödünç aldığı kitabı kaydediyor
+            # Kullanıcı ödünç aldığı kitabı kaydettigi bolum
             for uye in tum_uyeler:
                 if uye.get("kullanici_ismi", "").lower() == uye_sec.lower():
                     uye["odunc_kitaplar"].append({
                         "Kitap_Adi": kitap["Kitap_Adi"],
                         "Barkod": kitap["Barkod"],
                         "Odunc_Tarihi": kitap["zaman"],  # Odünç alındığı tarih
-                        "Teslim_Tarihi": odunc_suresi  # 2 hafta sonra teslim tarihi
+                        "Teslim_Tarihi": odunc_suresi,  # 2 hafta sonra teslim tarihi
+                        "Odunc_Alma_Tarihi": odunc_alma_zamani
                     })
-                    dosya_kaydet(tum_uyeler)  # Güncellenmiş kullanıcıları kaydet
+                    uye_kaydet(tum_uyeler)  # Güncellenmiş kullanıcıları kaydet
                     break
 
             dosya_kaydet(tum_kitaplar)  # Kitapları güncelle
@@ -130,7 +131,37 @@ def kitap_odunc_verme():
     print(f"Kitap {odunc_suresi} tarihine kadar ödünc verildi.")
 
     
-kitap_odunc_verme()
+#kitap_odunc_verme()
 def kitap_iade():
+    tum_kitaplar = dosya_yukle()
+    tum_uyeler = uye_yukle()
+    uye_sec = input("Kitabi Teslim Etmek Isteyen Uyenin Ismini Giriniz: ").strip()
+    kitap_sec = input("Kullanicinin Teslim Etmek Istedigi Kitabin Adini Giriniz: ").strip()    
+
+    for kitap in tum_kitaplar:
+        if kitap["Kitap_Adi"].lower() == kitap_sec.lower() and kitap["durum"] == "meşgul":
+            # Kitap ödünç verildiginde
+            kitap["durum"] = "uygun"
+            kitap["teslim_zamani"] = None  # Ödünç alma tarihi
+            kitap["alinma_zamani"] = None
+
+             # Kullanıcı ödünç aldığı kitabı kaydettigi bolum
+            for uye in tum_uyeler:
+                    if uye.get("kullanici_ismi", "").lower() == uye_sec.lower():
+                        odunc_listesi = uye.get("odunc_kitaplar", [])
+                        for odunc_kitap in odunc_listesi:
+                            if odunc_kitap["Kitap_Adi"].lower() == kitap_sec.lower():
+                                odunc_listesi.remove(odunc_kitap)  # Kitabı listeden çıkar
+                                
+                                break
+                        uye_kaydet(tum_uyeler)  # Güncellenmiş kullanıcıları kaydet
+                        break
+            dosya_kaydet(tum_kitaplar)  # Kitapları güncelle
+            print(f"{kitap_sec} kitabi basariyla teslim edildi.")
+            break
+        elif kitap["Kitap_Adi"].lower() == kitap_sec.lower() and kitap["durum"] != "meşgul":
+            print(f"{kitap_sec} kitabi su anda teslim edilmis durumda.")
+            break
 
     print("Uyeye ait kitap basariyla iade edildi..")
+#kitap_iade()
