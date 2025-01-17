@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "kullanici_ismi": "Islam Kavas",
+    "telefon": 645789412,
+    "adres": "Bir adres, Baska bir sokak,Hollanda",
+    "odunc_kitaplar": []
+  },
+  {
+    "id": "2",
+    "kullanici_ismi": "Zehra Okay",
+    "telefon": 678954168,
+    "adres": "bir adres,bir sokak, Hollanda",
+    "odunc_kitaplar": []
+  },
+  {
+    "id": "3",
+    "kullanici_ismi": "Yasin Utuk",
+    "telefon": 64568721,
+    "adres": "bir adres bir sokak, Hollanda",
+    "odunc_kitaplar": [
+      {
+        "Kitap_Adi": "Zamir",
+        "Barkod": 9786258495423,
+        "Odunc_Tarihi": "2025-01-30",
+        "Teslim_Tarihi": "2025-01-30"
+      },
+      {
+        "Kitap_Adi": "Altıncı Koğuş",
+        "Barkod": 9786052951569,
+        "Odunc_Tarihi": null,
+        "Teslim_Tarihi": "2025-01-30",
+        "Odunc_Alma_Tarihi": "2025-01-16"
+      }
+    ]
+  }
+ 
+]
